@@ -1,26 +1,34 @@
 <template>
-	<div id="app">
-		<HelloWorld msg="Welcome to Your Vue.js App"/>
+	<div class="app">
+		<HelloWorld helloMsg="Welcome to this Snippet Guru!"
+					subMsg="- The only one you'd ever need!"/>
+					<div class="snippets">
+					<HandleApi/>
+					</div>
 	</div>
 </template>
 
+<script src="https://cdn.jsdlivr.net/npm/vue"></script>
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-
+import HandleApi from './components/HandleApi'
 export default {
 	name: 'App',
 	components: {
-		HelloWorld
+		HelloWorld,
+		HandleApi
 	}
 }
 </script>
 
 <style>
-#app {
+.app {
 	font-family: Avenir, Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
-	color: #2c3e50;
+	-moz-osx-font-smoothing: grayscale;	
+}
+
+#imLoading{
+	color: white;
 }
 </style>
