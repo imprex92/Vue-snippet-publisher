@@ -10,10 +10,18 @@
 		</div>
 
 		<div class="getSnippets" v-if="addSnippet">
-			<AddSnippet/>
-			<button>Add awesome code</button>
+			<AddSnippet @whatForm="handleAdd($event)"/>
+			<span class="uploadedSpan">{{uploadMessage}}</span>
 		</div>
-
+		
+		<div class="getSnippets" v-if="higestScore">
+			<button @click="fetchFromAPI">Fetch Ranked</button>
+			<RankedSnippets @whatId="handleRemove($event)" v-bind:rankedList="snippets" v-for="snippets in rankedSnippets" :key="snippets.id"/>
+		</div>
+		
+		<span v-if="operationProgress" id="operationProgress" >
+			<p id="loading">Loading In Progress<span> .</span><span> .</span><span> .</span></p>
+		</span>
 	</div>
 </template>
 
@@ -21,21 +29,27 @@
 import axios from 'axios';
 import ShowSnippets from './ShowSnippets'
 import AddSnippet from './AddSnippet'
+import RankedSnippets from './RankedSnippets'
 export default {
 	name: 'HandleApi',
 	components: {
 		ShowSnippets,
-		AddSnippet
+		AddSnippet,
+		RankedSnippets,
 	},
 	
 	data: () => ({
+		formFromChild: [],
 		latestSnippets: [],
+		rankedSnippets: [],
 		idToRemove: Number,
 		baseURL: 'https://www.forverkliga.se/JavaScript/api/api-snippets.php',
 		showLatest: false,
 		addSnippet: false,
 		higestScore: false,
 		reported: false,
+		uploadMessage: '',
+		operationProgress: false
 	}),
 	methods:{
 		seeLatest(){
@@ -66,6 +80,7 @@ export default {
 
 
 		fetchFromAPI(){
+			this.operationProgress = true;
 			axios.get('https://www.forverkliga.se/JavaScript/api/api-snippets.php?latest')
 				.then((Response) => {
 					console.log(Response);
@@ -74,7 +89,17 @@ export default {
 					console.log(Response.status);
 					console.log(Response.config);
 					console.log(this.latestSnippets);
+					this.operationProgress = false
 				})	
+				.catch((error) => {
+					console.log(error.data);
+
+				}) 
+		},
+		fetchRankedAPI(){
+			this.operationProgress = true;
+			
+			axios.get()
 		},
 		handleRemove(emittedId){			
 			this.idToRemove = emittedId
@@ -84,7 +109,7 @@ export default {
 			params.append("delete", null);
 			params.append('id', this.idToRemove);
 
-			this.$http.post('https://www.forverkliga.se/JavaScript/api/api-snippets.php',  params)
+			this.$http.post(this.baseURL,  params)
 				.then((Response) => {
 					console.log(Response);
 					console.log(Response.headers);
@@ -93,12 +118,38 @@ export default {
 						);
 						console.log(Response)
 				})
+				.catch((error) => {
+					console.log(error.data);
+
+				})
+		},
+		handleAdd(emittedForm){
+			
+			this.formFromChild = emittedForm;
+			const params = new URLSearchParams();
+			params.append('add', null);
+			params.append('title', this.formFromChild.titleInput);
+			params.append('content', this.formFromChild.contentInput);
+			params.append('tags', 'tag1');
+			
+			axios.post(this.baseURL, params)
+				.then((Response) => {
+					console.log(Response.data);
+					this.uploadMessage = 'Snippet sucessfully uploaded!'
+				})
+				.catch((error) => {
+					console.log(error.data);
+					this.uploadMessage = 'An error has accrued' + error.data;
+				})
+				
 		}
+
 	}
 }
 </script>
 
 <style>
+
 .nav{
 	display: flex;
 	flex-direction: row;
@@ -126,5 +177,45 @@ export default {
 .getSnippets > button:hover{
 	cursor: pointer;
 	border: 3px solid yellowgreen;
+}
+
+/* Loading animations below */
+
+@keyframes opacity {
+	0% { opacity: 1; }
+	100% { opacity: 0; }
+}
+@-moz-keyframes opacity {
+	0% { opacity: 1; }
+	100% { opacity: 0; }
+}
+#operationProgress{
+	color: rgb(100, 255, 86);
+	font-weight: 600;
+}
+#loading {
+	text-align: center; 
+	margin: 100px 0 0 0;
+	font-size: 1.5em;
+}
+
+#loading span {
+	animation-name: opacity;
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+	
+	-moz-animation-name: opacity;
+	-moz-animation-duration: 1s;
+	-moz-animation-iteration-count: infinite;
+}
+
+#loading span:nth-child(2) {
+	animation-delay: 100ms;
+	-moz-animation-delay: 100ms;
+}
+
+#loading span:nth-child(3) {
+	animation-delay: 300ms;
+	-moz-animation-delay: 300ms;
 }
 </style>
