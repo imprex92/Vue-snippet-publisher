@@ -1,51 +1,51 @@
 <template>
-  <div class="snippets">		
+	<div class="snippets">		
 		<div class="containerItem" >
 			<span class="pngButtons">
 			<div class="item-1">
-			<strong> Title: </strong> {{ snippetList.title }} 
+			<strong> Title: </strong> {{ reportedList.title }} 
 			</div>
 			<div class="item-2">
-				<img src="../assets/trash-can.png" alt="trash" style="width:25px;height:25px;" @click="handleRemove" class="removeItem" :id="snippetList.id">
+				<img src="../assets/trash-can.png" alt="trash" style="width:25px;height:25px;" @click="handleRemove" class="removeItem" :id="reportedList.id">
 				</div>
 				<div class="item-3">
-				<img src="../assets/exclamation-mark.png" alt="Report snippet" style="width:10px;height:25px;">
+				
 				</div>
 				<div class="item-4"> 
-				<img src="../assets/thumbup.png" alt="Thumb Up, Upvote" style="width:25px;height:25px;">
-				{{ snippetList.score}}
+				<img  src="../assets/undo-arrow.png" alt="Undo report" style="width:25px;height:25px;" @click="handleUnreport" :id="reportedList.id">
 				</div>
 			</span>
 			<br> <hr> 
 			<strong> Content: </strong> <p> 
-				{{ snippetList.content}}  </p> 
-		</div>			
+				{{ reportedList.content}}  </p> 
+		</div>		
 	</div>
 </template>
 
 <script>
 export default {
-	name: 'ShowSnippets',
+	namn: 'ReportedSnippets',
 	props: {
-		snippetList: Object(null)
+		reportedList: Object(null),
 	},
-	data: () => ({
-		snippetId: Number,
-		toShow: false
-	}),
 	methods: {
-		handleRemove(button){
-			console.log(button.target.id);
-			this.snippetId = button.target.id
+		handleRemove(trash){
+			console.log(trash.target.id);
+			this.snippetId = trash.target.id
 			this.$emit('whatId', this.snippetId)
+		},
+		handleUnreport(undoArrow){
+			console.log(undoArrow.target.id);			
+			this.undoId = undoArrow.target.id;
+			this.$emit('whatUndo', this.undoId);
+			
 		}
 	}
 }
 </script>
 
 <style>
-/* texten i vita rutor */
-.pngButtons{
+	.pngButtons{
 	display: flex;	
 }
 .pngButtons .item-1{
@@ -60,7 +60,6 @@ export default {
 .pngButtons .item-4{
 	flex-grow: 1;
 }
-
 .snippets{ 
 	background-color: rgb(0, 0, 0);
 	width: 75%;
