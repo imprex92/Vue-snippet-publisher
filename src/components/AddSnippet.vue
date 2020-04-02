@@ -72,4 +72,16 @@ text-align: center;
 cursor: pointer;
 border: 3px solid yellowgreen;
 }
+@media (max-width: 315px){
+	.snippets1 > button{
+		padding: 1em 1.9em 1em;
+		border-radius: 30px;
+		border: 3px solid lightgrey;
+		text-align: center;	
+	}
+	.snippets1 > button:hover{
+		cursor: pointer;
+		border: 3px solid yellowgreen;
+	}
+}
 </style>

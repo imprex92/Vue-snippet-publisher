@@ -357,4 +357,34 @@ export default {
 	animation-delay: 300ms;
 	-moz-animation-delay: 300ms;
 }
+@media (max-width: 230px){
+	.getSnippets > button {
+	padding: 1em 1.9em 1em;
+	border-radius: 30px;
+	border: 3px solid lightgrey;
+}
+	.getSnippets > button:hover {
+		cursor: pointer;
+		border: 3px solid yellowgreen;
+	}
+}
+
+@media (max-width: 400px) {
+	.nav {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+	}
+	.nav > button {
+		padding: 0.3em 1em 0.3em;
+		border-radius: 30px;
+		/* border: 3px solid lightgrey; */
+		margin-bottom: 1.5em;
+	}
+	.nav > button:hover {
+		cursor: pointer;
+		border: 3px solid yellowgreen;
+	}
+}
+
 </style>
