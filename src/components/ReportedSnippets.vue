@@ -37,15 +37,14 @@ export default {
 		handleUnreport(undoArrow){
 			console.log(undoArrow.target.id);			
 			this.undoId = undoArrow.target.id;
-			this.$emit('whatUndo', this.undoId);
-			
+			this.$emit('whatUndo', this.undoId);			
 		}
 	}
 }
 </script>
 
 <style scoped>
-	.pngButtons{
+.pngButtons{
 	display: flex;	
 }
 .pngButtons .item-1{
@@ -82,19 +81,19 @@ export default {
 	padding-right: 1em;
 	padding-top: 1em;
 	color: black;
-	}
-	.containerItem > button{
-		padding: 0.5em 2em 0.5em;
-		border-radius: 30px;
-		border: 3px solid lightgrey;
-	}
-	.containerItem:first-child{
-		margin-top: 1em;
-	}
-	.containerItem > p{
-		padding-bottom: 1em;
-	}
-	.removeItem:hover{
-		cursor: pointer;
-	}
+}
+.containerItem > button{
+	padding: 0.5em 2em 0.5em;
+	border-radius: 30px;
+	border: 3px solid lightgrey;
+}
+.containerItem:first-child{
+	margin-top: 1em;
+}
+.containerItem > p{
+	padding-bottom: 1em;
+}
+.removeItem:hover{
+	cursor: pointer;
+}
 </style>

@@ -121,12 +121,7 @@ export default {
 					"https://www.forverkliga.se/JavaScript/api/api-snippets.php?latest"
 				)
 				.then(Response => {
-					console.log(Response);
-					console.log(Response.data);
 					this.latestSnippets = Response.data;
-					console.log(Response.status);
-					console.log(Response.config);
-					console.log(this.latestSnippets);
 					this.operationProgress = false;
 				})
 				.catch(error => {
@@ -138,7 +133,6 @@ export default {
 			axios
 				.get("https://forverkliga.se/JavaScript/api/api-snippets.php?best")
 				.then(Response => {
-					console.log(Response.data);
 					this.rankedSnippets = Response.data;
 					this.operationProgress = false;
 				})
@@ -151,7 +145,6 @@ export default {
 			axios
 				.get("https://forverkliga.se/JavaScript/api/api-snippets.php?reported")
 				.then(Response => {
-					console.log(Response.data);
 					this.reportedSnippets = Response.data;
 					this.operationProgress = false;
 				})
@@ -171,11 +164,9 @@ export default {
 				.post(this.baseURL, params)
 				.then(Response => {
 					console.log(Response);
-					console.log(Response.headers);
 					this.latestSnippets = this.latestSnippets.filter(
 						latestSnippets => latestSnippets.id != this.idToRemove
 					);
-					console.log(Response);
 
 					this.rankedSnippets = this.rankedSnippets.filter(
 						rankedSnippets => rankedSnippets.id != this.idToRemove
@@ -187,30 +178,28 @@ export default {
 				.catch(error => {
 					console.log(error.data);
 				});
-		},
+		},		
 		handleReport(emittedReportId) {
-		this.idToReport = emittedReportId;
-		console.log(this.idToReport);
-		
-		const params = new URLSearchParams();
-		params.append('report', null);
-		params.append('id', this.idToReport);
+			this.idToReport = emittedReportId;
+			console.log(this.idToReport);
+			
+			const params = new URLSearchParams();
+			params.append('report', null);
+			params.append('id', this.idToReport);
 
-		this.$http
-			.post(this.baseURL, params)
-			.then(Response => {
-				console.log(Response);
-				console.log(Response.headers);
-				this.latestSnippets = this.latestSnippets.filter(
-					latestSnippets => latestSnippets.id != this.idToReport
-				);
-				console.log(Response);
+			this.$http
+				.post(this.baseURL, params)
+				.then(Response => {
+					this.latestSnippets = this.latestSnippets.filter(
+						latestSnippets => latestSnippets.id != this.idToReport
+					);
+					console.log(Response);
 
-				this.rankedSnippets = this.rankedSnippets.filter(
-					rankedSnippets => rankedSnippets.id != this.idToReport
-				);
-			})
-	},
+					this.rankedSnippets = this.rankedSnippets.filter(
+						rankedSnippets => rankedSnippets.id != this.idToReport
+					);
+				})
+		},
 		handleUnreport(emittedUnreportId) {
 			this.idToUnreport = emittedUnreportId;
 			console.log(this.idToUnreport);
@@ -230,43 +219,39 @@ export default {
 				.catch(error => {
 					console.log(error.data);
 				});
-	},
-	handleUpvote(emittedUpvoteId){
-		this.idToUpvote = emittedUpvoteId;
-		const params = new URLSearchParams();
-		params.append('upvote', null);
-		params.append('id', this.idToUpvote);
+		},
+		handleUpvote(emittedUpvoteId){
+			this.idToUpvote = emittedUpvoteId;
+			const params = new URLSearchParams();
+			params.append('upvote', null);
+			params.append('id', this.idToUpvote);
 
-		this.$http
-		.post(this.baseURL, params)
-		.then(Response => {
-			console.log(Response);
+			this.$http
+			.post(this.baseURL, params)
+			.then(Response => {
+				console.log(Response);				
+			})
+			.catch(error => {
+				console.log(error.data);						
+			});
+		},
+		handleDownvote(emittedDownvoteId){
+			this.idToDownvote = emittedDownvoteId;
+			console.log('emitted id', this.idToDownvote);
 			
-		})
-		.catch(error => {
-					console.log(error.data);
-					
-				});
-	},
-	handleDownvote(emittedDownvoteId){
-		this.idToDownvote = emittedDownvoteId;
-		console.log('emitted id', this.idToDownvote);
-		
-		const params = new URLSearchParams();
-		params.append('downvote', null);
-		params.append('id', this.idToDownvote);
+			const params = new URLSearchParams();
+			params.append('downvote', null);
+			params.append('id', this.idToDownvote);
 
-		this.$http
-		.post(this.baseURL, params)
-		.then(Response => {
-			console.log(Response);
-			
-		})
-		.catch(error => {
-			console.log(error.data);
-			
-		})
-	},
+			this.$http
+			.post(this.baseURL, params)
+			.then(Response => {
+				console.log(Response);				
+			})
+			.catch(error => {
+				console.log(error.data);				
+			})
+		},
 		handleAdd(emittedForm) {
 			this.formFromChild = emittedForm;
 			const params = new URLSearchParams();
@@ -286,14 +271,14 @@ export default {
 					this.uploadMessage = "An error has accrued" + error.data;
 				});
 		},
-	}
+	},
 };
 </script>
 
 <style>
 .active{
 	border: 3px solid blueviolet;
-		padding: 0.3em 1em 0.3em;
+	padding: 0.3em 1em 0.3em;
 	border-radius: 30px;
 	margin-bottom: 1.5em;
 }

@@ -17,14 +17,14 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .hello{
-		margin: 0;
-		text-align: center;
-	}
-	.hello > h1{
-		margin: 0;
-	}
-	.hello > h3{
-		margin-top: -15px;
-		margin-bottom: 2em;
-	}
+	margin: 0;
+	text-align: center;
+}
+.hello > h1{
+	margin: 0;
+}
+.hello > h3{
+	margin-top: -15px;
+	margin-bottom: 2em;
+}
 </style>

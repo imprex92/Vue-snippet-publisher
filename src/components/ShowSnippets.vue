@@ -2,25 +2,25 @@
   <div class="snippets">		
 		<div class="containerItem" >
 			<span class="pngButtons">
-			<div class="item-1">
-			<strong> Title: </strong> {{ snippetList.title }} 
-			</div>
+				<div class="item-1">
+					<strong> Title: </strong> {{ snippetList.title }} 
+				</div>
 			<div class="item-2">
 				<img src="../assets/trash-can.png" alt="trash" style="width:25px;height:25px;" @click="handleRemove" class="removeItem" :id="snippetList.id">
-				</div>
-				<div class="item-3">
+			</div>
+			<div class="item-3">
 				<img src="../assets/exclamation-mark.png" alt="Report snippet" style="width:10px;height:25px;" @click="handleReport"
 				:id="snippetList.id"
 				>
-				</div>
-				<div class="item-4"> 
+			</div>
+			<div class="item-4"> 
 				<img src="../assets/thumbup.png" alt="Thumb Up, Upvote" style="width:25px;height:25px;" :id="snippetList.id" v-debounce:2s="handleUpvote">
 				{{ snippetList.score}} 
 				<img v-debounce:2s="handleDownvote" :id="snippetList.id"   src="../assets/thumbdown.png" alt="Thumb down, Downvote" style="width:25px;height:25px;">
-				</div>
+			</div>
 			</span>
-			<br> <hr> 
-			<strong> Content: </strong> <p> 
+				<br> <hr> 
+				<strong> Content: </strong> <p> 
 				{{ snippetList.content}}  </p> 
 		</div>
 	</div>
@@ -81,7 +81,6 @@ export default {
 .pngButtons .item-4{
 	flex-grow: 1;
 }
-
 .snippets{ 
 	background-color: rgb(0, 0, 0);
 	width: 75vw;
@@ -104,19 +103,19 @@ export default {
 	padding-right: 1em;
 	padding-top: 1em;
 	color: black;
-	}
-	.containerItem > button{
-		padding: 0.5em 2em 0.5em;
-		border-radius: 30px;
-		border: 3px solid lightgrey;
-	}
-	.containerItem:first-child{
-		margin-top: 1em;
-	}
-	.containerItem > p{
-		padding-bottom: 1em;
-	}
-	img:hover{
-		cursor: pointer;
-	}
+}
+.containerItem > button{
+	padding: 0.5em 2em 0.5em;
+	border-radius: 30px;
+	border: 3px solid lightgrey;
+}
+.containerItem:first-child{
+	margin-top: 1em;
+}
+.containerItem > p{
+	padding-bottom: 1em;
+}
+img:hover{
+	cursor: pointer;
+}
 </style>

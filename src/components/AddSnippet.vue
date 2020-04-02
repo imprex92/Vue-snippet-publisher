@@ -36,23 +36,22 @@ export default {
 </script>
 
 <style scoped>
-	textarea{
-		background: url(../assets/codeIcon.png) center center no-repeat; /* This ruins default border */
-		border: 1px solid #888;
-		outline: none;
-		-moz-outline: none;
-	}
-	#titleInput{
-		width: 33vw;
-		height: 2em;
-		margin-bottom: 2em;
-		
-	}
-	p{
-		padding-bottom: 0;
-		margin-bottom: 2px;
-	}
-	.snippets1{ 
+textarea{
+	background: url(../assets/codeIcon.png) center center no-repeat; /* This ruins default border */
+	border: 1px solid #888;
+	outline: none;
+	-moz-outline: none;
+}
+#titleInput{
+	width: 33vw;
+	height: 2em;
+	margin-bottom: 2em;	
+}
+p{
+	padding-bottom: 0;
+	margin-bottom: 2px;
+}
+.snippets1{ 
 	background-color: rgb(0, 0, 0);
 	width: 75vw;
 	margin: auto;
@@ -63,14 +62,14 @@ export default {
 .snippets1:nth-child(1){
 	padding-top: 1em;
 }
-	.snippets1 > button{
-	padding: 1em 4em 1em;
-	border-radius: 30px;
-	border: 3px solid lightgrey;
-	text-align: center;	
-	}
-	.snippets1 > button:hover{
-	cursor: pointer;
-	border: 3px solid yellowgreen;
+.snippets1 > button{
+padding: 1em 4em 1em;
+border-radius: 30px;
+border: 3px solid lightgrey;
+text-align: center;	
+}
+.snippets1 > button:hover{
+cursor: pointer;
+border: 3px solid yellowgreen;
 }
 </style>
