@@ -9,36 +9,57 @@
 				<img src="../assets/trash-can.png" alt="trash" style="width:25px;height:25px;" @click="handleRemove" class="removeItem" :id="snippetList.id">
 				</div>
 				<div class="item-3">
-				<img src="../assets/exclamation-mark.png" alt="Report snippet" style="width:10px;height:25px;">
+				<img src="../assets/exclamation-mark.png" alt="Report snippet" style="width:10px;height:25px;" @click="handleReport"
+				:id="snippetList.id"
+				>
 				</div>
 				<div class="item-4"> 
-				<img src="../assets/thumbup.png" alt="Thumb Up, Upvote" style="width:25px;height:25px;">
-				{{ snippetList.score}}
+				<img src="../assets/thumbup.png" alt="Thumb Up, Upvote" style="width:25px;height:25px;" :id="snippetList.id" v-debounce:2s="handleUpvote">
+				{{ snippetList.score}} 
+				<img v-debounce:2s="handleDownvote" :id="snippetList.id"   src="../assets/thumbdown.png" alt="Thumb down, Downvote" style="width:25px;height:25px;">
 				</div>
 			</span>
 			<br> <hr> 
 			<strong> Content: </strong> <p> 
 				{{ snippetList.content}}  </p> 
-		</div>			
+		</div>
 	</div>
 </template>
 
+<script src="https://unpkg.com/lodash.debounce@4.0.8/index.js"></script>
 <script>
 export default {
 	name: 'ShowSnippets',
 	props: {
-		snippetList: Object(null)
+		snippetList: Object(null),
 	},
 	data: () => ({
 		snippetId: Number,
-		toShow: false
+		toShow: false,		
 	}),
-	methods: {
-		handleRemove(button){
-			console.log(button.target.id);
-			this.snippetId = button.target.id
+	methods: {  
+		handleRemove(trash){
+			console.log(trash.target.id);
+			this.snippetId = trash.target.id
 			this.$emit('whatId', this.snippetId)
-		}
+		},
+		handleReport(exclamation){
+			console.log(exclamation.target.id);
+			this.reportId = exclamation.target.id;
+			this.$emit('whatReport', this.reportId);
+		},
+		handleUpvote(thumbup, val, e){
+			console.log(val.target.id);
+			this.upvoteId = val.target.id;
+			this.$emit('whatUpvote', this.upvoteId);
+			this.snippetList.score += 1;			
+		},
+		handleDownvote(thumbdown, val, e){
+			console.log(val.target.id);
+			this.downvoteId = val.target.id;
+			this.$emit('whatDownvote', this.downvoteId);
+			this.snippetList.score -= 1;
+		},	
 	}
 }
 </script>
@@ -95,7 +116,7 @@ export default {
 	.containerItem > p{
 		padding-bottom: 1em;
 	}
-	.removeItem:hover{
+	img:hover{
 		cursor: pointer;
 	}
 </style>

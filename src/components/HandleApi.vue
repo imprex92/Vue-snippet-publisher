@@ -11,6 +11,9 @@
       <button @click="fetchFromAPI">Fetch from api</button>
       <ShowSnippets
         @whatId="handleRemove($event)"
+		@whatReport="handleReport($event)"
+		@whatUpvote="handleUpvote($event)"
+		@whatDownvote="handleDownvote($event)"
         v-bind:snippetList="snippets"
         v-for="snippets in latestSnippets"
         :key="snippets.id"
@@ -26,20 +29,25 @@
       <button @click="fetchRankedAPI">Fetch Ranked</button>
       <RankedSnippets
         @whatId="handleRemove($event)"
+		@whatReport="handleReport($event)"
+		@whatUpvote="handleUpvote($event)"
+		@whatDownvote="handleDownvote($event)"
         v-bind:rankedList="snippets"
         v-for="snippets in rankedSnippets"
         :key="snippets.id"
       />
     </div>
 
-	<div class="getSnippets" v-if="reported">
-		<button @click="fetchReportedAPI">Fetch Reported</button>
-		<ReportedSnippets 
-		@whatId="handleRemove($event)" @whatUndo="handleUnreport($event)" v-bind:reportedList="snippets" 
-		v-for="snippets in reportedSnippets" 
-		:key="snippets.id"
-		/>
-	</div>
+    <div class="getSnippets" v-if="reported">
+      <button @click="fetchReportedAPI">Fetch Reported</button>
+      <ReportedSnippets
+        @whatId="handleRemove($event)"
+        @whatUndo="handleUnreport($event)"
+        v-bind:reportedList="snippets"
+        v-for="snippets in reportedSnippets"
+        :key="snippets.id"
+      />
+    </div>
 
     <span v-if="operationProgress" id="operationProgress">
       <p id="loading">
@@ -63,15 +71,15 @@ export default {
   components: {
     ShowSnippets,
     AddSnippet,
-	RankedSnippets,
-	ReportedSnippets,
+    RankedSnippets,
+    ReportedSnippets
   },
 
   data: () => ({
     formFromChild: [],
     latestSnippets: [],
-	rankedSnippets: [],
-	reportedSnippets: [],
+    rankedSnippets: [],
+    reportedSnippets: [],
     idToRemove: Number,
     baseURL: "https://www.forverkliga.se/JavaScript/api/api-snippets.php",
     showLatest: false,
@@ -79,7 +87,8 @@ export default {
     higestScore: false,
     reported: false,
     uploadMessage: "",
-    operationProgress: false
+	operationProgress: false,
+	
   }),
   methods: {
     seeLatest() {
@@ -106,7 +115,6 @@ export default {
       this.higestScore = false;
       this.reported = true;
     },
-
     fetchFromAPI() {
       this.operationProgress = true;
       axios
@@ -138,12 +146,12 @@ export default {
         .catch(error => {
           console.log(error.data);
         });
-	},
-	fetchReportedAPI(){
-		this.operationProgress = true;
-		axios
-			.get('https://forverkliga.se/JavaScript/api/api-snippets.php?reported')
-			.then(Response => {
+    },
+    fetchReportedAPI() {
+      this.operationProgress = true;
+      axios
+        .get("https://forverkliga.se/JavaScript/api/api-snippets.php?reported")
+        .then(Response => {
           console.log(Response.data);
           this.reportedSnippets = Response.data;
           this.operationProgress = false;
@@ -151,7 +159,7 @@ export default {
         .catch(error => {
           console.log(error.data);
         });
-	},
+    },
     handleRemove(emittedId) {
       this.idToRemove = emittedId;
       console.log(this.idToRemove);
@@ -170,36 +178,95 @@ export default {
           );
           console.log(Response);
 
-        this.rankedSnippets = this.rankedSnippets.filter(
+          this.rankedSnippets = this.rankedSnippets.filter(
             rankedSnippets => rankedSnippets.id != this.idToRemove
-		);
-		this.reportedSnippets = this.reportedSnippets.filter(
+          );
+          this.reportedSnippets = this.reportedSnippets.filter(
             reportedSnippets => reportedSnippets.id != this.idToRemove
           );
         })
         .catch(error => {
           console.log(error.data);
         });
-	},
-	handleUnreport(emittedUnreportId){
-		this.idToUnreport = emittedUnreportId;
-		console.log(this.idToUnreport);
+    },
+    handleReport(emittedReportId) {
+		this.idToReport = emittedReportId;
+		console.log(this.idToReport);
 		
 		const params = new URLSearchParams();
-		params.append('unreport', null)
-		params.append('id', this.idToUnreport)
+		params.append('report', null);
+		params.append('id', this.idToReport);
+
 		this.$http
 			.post(this.baseURL, params)
 			.then(Response => {
 				console.log(Response);
 				console.log(Response.headers);
-				this.reportedSnippets = this.reportedSnippets.filter(
-				reportedSnippets => reportedSnippets.id != this.idToUnreport
+				this.latestSnippets = this.latestSnippets.filter(
+					latestSnippets => latestSnippets.id != this.idToReport
+				);
+				console.log(Response);
+
+				this.rankedSnippets = this.rankedSnippets.filter(
+					rankedSnippets => rankedSnippets.id != this.idToReport
 				);
 			})
-			.catch(error => {
-				console.log(error.data);				
-			})
+	},
+    handleUnreport(emittedUnreportId) {
+      this.idToUnreport = emittedUnreportId;
+      console.log(this.idToUnreport);
+
+      const params = new URLSearchParams();
+      params.append("unreport", null);
+      params.append("id", this.idToUnreport);
+      this.$http
+        .post(this.baseURL, params)
+        .then(Response => {
+          console.log(Response);
+          console.log(Response.headers);
+          this.reportedSnippets = this.reportedSnippets.filter(
+            reportedSnippets => reportedSnippets.id != this.idToUnreport
+          );
+        })
+        .catch(error => {
+          console.log(error.data);
+        });
+	},
+	handleUpvote(emittedUpvoteId){
+		this.idToUpvote = emittedUpvoteId;
+		const params = new URLSearchParams();
+		params.append('upvote', null);
+		params.append('id', this.idToUpvote);
+
+		this.$http
+		.post(this.baseURL, params)
+		.then(Response => {
+			console.log(Response);
+			
+		})
+		.catch(error => {
+          console.log(error.data);
+          
+        });
+	},
+	handleDownvote(emittedDownvoteId){
+		this.idToDownvote = emittedDownvoteId;
+		console.log('emitted id', this.idToDownvote);
+		
+		const params = new URLSearchParams();
+		params.append('downvote', null);
+		params.append('id', this.idToDownvote);
+
+		this.$http
+		.post(this.baseURL, params)
+		.then(Response => {
+			console.log(Response);
+			
+		})
+		.catch(error => {
+			console.log(error.data);
+			
+		})
 	},
     handleAdd(emittedForm) {
       this.formFromChild = emittedForm;
@@ -219,7 +286,7 @@ export default {
           console.log(error.data);
           this.uploadMessage = "An error has accrued" + error.data;
         });
-    }
+    },
   }
 };
 </script>
