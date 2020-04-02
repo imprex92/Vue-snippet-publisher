@@ -95,19 +95,19 @@ export default {
 	padding-right: 1em;
 	padding-top: 1em;
 	color: black;
-	}
-	.containerItem > button{
-		padding: 0.5em 2em 0.5em;
-		border-radius: 30px;
-		border: 3px solid lightgrey;
-	}
-	.containerItem:first-child{
-		margin-top: 1em;
-	}
-	.containerItem > p{
-		padding-bottom: 1em;
-	}
-	img:hover{
-		cursor: pointer;
-	}
+}
+.containerItem > button{
+	padding: 0.5em 2em 0.5em;
+	border-radius: 30px;
+	border: 3px solid lightgrey;
+}
+.containerItem:first-child{
+	margin-top: 1em;
+}
+.containerItem > p{
+	padding-bottom: 1em;
+}
+img:hover{
+	cursor: pointer;
+}
 </style>
