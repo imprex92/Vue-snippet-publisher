@@ -57,7 +57,7 @@ export default {
 }
 </script>
 
-<style>
+<style >
 .pngButtons{
 	display: flex;	
 }
@@ -75,7 +75,7 @@ export default {
 }
 .snippets{ 
 	background-color: rgb(0, 0, 0);
-	width: 75%;
+	width: 75vw;
 	margin: auto;
 	border-radius: 20px;
 	padding: 2em 0px 0.5em;
@@ -87,7 +87,7 @@ export default {
 }
 .containerItem{
 	background-color: rgb(255, 255, 255);
-	width: 60%;
+	width: 60vw;
 	margin: auto;
 	margin-bottom: 1em;
 	border-radius: 20px;
