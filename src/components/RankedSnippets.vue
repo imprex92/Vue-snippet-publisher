@@ -6,7 +6,7 @@
 					<strong> Title: </strong> {{ rankedList.title }} 
 				</div>
 				<div class="item-2">
-					<img src=".../img/trash-can.png" alt="trash" style="width:25px;height:25px;" @click="handleRemove" class="removeItem" :id="rankedList.id">
+					<img src="./assets/trash-can.png" alt="trash" style="width:25px;height:25px;" @click="handleRemove" class="removeItem" :id="rankedList.id">
 				</div>
 				<div class="item-3">
 					<img src="../assets/exclamation-mark.png" alt="Report snippet" style="width:10px;height:25px;" :id="rankedList.id">
