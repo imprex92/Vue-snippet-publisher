@@ -6,7 +6,7 @@
 			<strong> Title: </strong> {{ reportedList.title }} 
 			</div>
 			<div class="item-2">
-				<img src="../assets/trash-can.png" alt="trash" style="width:25px;height:25px;" @click="handleRemove" class="removeItem" :id="reportedList.id">
+				<img src="https://lh3.googleusercontent.com/po8W-SGdfioV7CuxOB_7nrVYYJ6ENyGYr_VT0ys93YjOuC_KAMqVsUvB1oPl6mxmpWAH-rWMFpuUbdF7IYHXoCEvo-Jga0MrrpeAOpM1YzsSwPHC-WRpFcE7xM46C7EIGphDzgY3t1U=w2400" alt="trash" style="width:25px;height:25px;" @click="handleRemove" class="removeItem" :id="reportedList.id">
 				</div>
 				<div class="item-3">
 				

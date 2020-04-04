@@ -6,15 +6,15 @@
 					<strong> Title: </strong> {{ rankedList.title }} 
 				</div>
 				<div class="item-2">
-					<img src="../assets/trash-can.png" alt="trash" style="width:25px;height:25px;" @click="handleRemove" class="removeItem" :id="rankedList.id">
+					<img src="https://lh3.googleusercontent.com/po8W-SGdfioV7CuxOB_7nrVYYJ6ENyGYr_VT0ys93YjOuC_KAMqVsUvB1oPl6mxmpWAH-rWMFpuUbdF7IYHXoCEvo-Jga0MrrpeAOpM1YzsSwPHC-WRpFcE7xM46C7EIGphDzgY3t1U=w2400" alt="trash" style="width:25px;height:25px;" @click="handleRemove" class="removeItem" :id="rankedList.id">
 				</div>
 				<div class="item-3">
-					<img src="../assets/exclamation-mark.png" alt="Report snippet" style="width:10px;height:25px;" @click="handleReport" :id="rankedList.id">
+					<img src="https://lh3.googleusercontent.com/P03ZHDA_k1hCUQCwalrhIpR9ZnvpbsAO7BjyqmoCLmTMoxA8sKvaSnnPU5FiLM_pLZ-3ZXtywh9k06E2hD6Tr8ggVFFuw8fB4dLRvZUDNEXytX1mt8kZhJMLD9i_4gMskE6NdPQBb9w=w2400" alt="Report snippet" style="width:10px;height:25px;" @click="handleReport" :id="rankedList.id">
 				</div>
 				<div class="item-4"> 
-					<img src="../assets/thumbup.png" alt="Thumb Up, Upvote" style="width:25px;height:25px;" :id="rankedList.id" v-debounce:2s="handleUpvote">
+					<img src="https://lh3.googleusercontent.com/3ox2JWHHFQ20YG_gZ6jrrWpPN1xdpUTd-QGGez-lLkbU_8azQtSWTCOK-LNl1nJ5HWD3FddztuVa_rjGe7fM7FbGvq40FP6dUte8sFRsQJ49Pvtzp6V30qcTUsunjk41lnL38cXNjyE=s225-p-k" alt="Thumb Up, Upvote" style="width:25px;height:25px;" :id="rankedList.id" v-debounce:2s="handleUpvote">
 					{{ rankedList.score}}
-					<img src="../assets/thumbdown.png" alt="Thumb Down, Downvote" style="width:25px;height:25px;" :id="rankedList.id" v-debounce:2s="handleDownvote">
+					<img src="https://lh3.googleusercontent.com/vzinEGIlZUrW0zuVSO5uiMfbCwN6tzO2gibk_yB7VGzPi148W7-CZFu1Qjmr7Ox9AVD5c50KA3J7PCz34lCfulseHi5mcOQE0BUuArZv9-KAfzj-oqOVtR6C3Qqlf69eGbJndZwoMyc=s225-p-k" alt="Thumb Down, Downvote" style="width:25px;height:25px;" :id="rankedList.id" v-debounce:2s="handleDownvote">
 				</div>
 			</span>
 				<br> <hr> 
