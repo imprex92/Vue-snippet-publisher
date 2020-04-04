@@ -6,7 +6,7 @@
 					<strong> Title: </strong> {{ rankedList.title }} 
 				</div>
 				<div class="item-2">
-					<img src="./assets/trash-can.png" alt="trash" style="width:25px;height:25px;" @click="handleRemove" class="removeItem" :id="rankedList.id">
+					<img src="../assets/trash-can.png" alt="trash" style="width:25px;height:25px;" @click="handleRemove" class="removeItem" :id="rankedList.id">
 				</div>
 				<div class="item-3">
 					<img src="../assets/exclamation-mark.png" alt="Report snippet" style="width:10px;height:25px;" :id="rankedList.id">
@@ -45,13 +45,13 @@ export default {
 			console.log(val.target.id);
 			this.upvoteId = val.target.id;
 			this.$emit('whatUpvote', this.upvoteId);
-			this.snippetList.score += 1;			
+			this.rankedList.score += 1;			
 		},
 		handleDownvote(thumbdown, val){
 			console.log(val.target.id);
 			this.downvoteId = val.target.id;
 			this.$emit('whatDownvote', this.downvoteId);
-			this.snippetList.score -= 1;
+			this.rankedList.score -= 1;
 		},	
 	}
 }
